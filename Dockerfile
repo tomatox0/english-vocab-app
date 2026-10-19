@@ -6,7 +6,7 @@ WORKDIR /app
 COPY . .
 
 # アプリをビルド（組み立て）
-RUN ./gradlew build -x test
+RUN ./gradlew build -x test && rm build/libs/*-plain.jar
 
 # Render用にポート8080を開放
 EXPOSE 8080
