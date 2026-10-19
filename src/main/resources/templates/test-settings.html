@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>テスト設定</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body class="bg-light text-dark">
+    <div class="container py-5" style="max-width: 500px;">
+        <h1 class="mb-4 text-center fw-bold">実力テスト</h1>
+
+        <div class="card shadow-sm border-0">
+            <div class="card-body py-5 text-center">
+                <p class="text-secondary mb-4">現在の登録単語数: <span th:text="${totalWords}"
+                        class="fw-bold text-dark"></span>語</p>
+
+                <form th:action="@{/test/play}" method="get">
+                    <div class="mb-4">
+                        <label class="form-label fw-bold">出題数を選択してください</label>
+                        <select name="limit" class="form-select form-select-lg border-dark-subtle text-center">
+                            <option value="10">10問</option>
+                            <option value="20">20問</option>
+                            <option value="30">30問</option>
+                        </select>
+                    </div>
+
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-dark btn-lg"
+                            th:disabled="${totalWords < 10}">テスト開始</button>
+                        <p class="text-danger small mt-2" th:if="${totalWords < 10}">※テストを行うには最低10個の単語登録が必要です。</p>
+
+                        <a th:href="@{/register}" class="btn btn-outline-secondary mt-3">単語管理へ</a>
+                        <a th:href="@{/study}" class="btn btn-outline-primary mt-3">学習モードへ</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
